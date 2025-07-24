@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:MAUI_Class_Tracker.Models"
+             x:Class="MAUI_Class_Tracker.Views.ReportPage"
+             Title="Reports">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="menu.png"
+                     Priority="0"
+                     Order="Primary"
+                     Command="{Binding OpenFlyoutCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <AbsoluteLayout>
+
+        <!-- Floating Buttons at the top center -->
+        <HorizontalStackLayout AbsoluteLayout.LayoutBounds="0.5,0,AutoSize,AutoSize"
+                               AbsoluteLayout.LayoutFlags="PositionProportional"
+                               Spacing="12"
+                               Padding="10">
+            <Button Text="Upcoming"
+                    BackgroundColor="DodgerBlue"
+                    TextColor="White"
+                    Clicked="OnUpcomingClicked"
+                    CornerRadius="25"
+                    WidthRequest="140"
+                    HeightRequest="45" />
+
+            <Button Text="Tentative"
+                    BackgroundColor="DodgerBlue"
+                    TextColor="White"
+                    Clicked="OnTentativeClicked"
+                    CornerRadius="25"
+                    WidthRequest="140"
+                    HeightRequest="45" />
+
+            <Button
+                    BackgroundColor="DodgerBlue"
+                    Clicked="OnRefreshClicked"
+                    CornerRadius="70"
+                    WidthRequest="45"
+                    HeightRequest="45"
+                    Padding="0" ContentLayout="Top, 10"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center">
+                <Button.ImageSource>
+                    <FileImageSource File="refreshwhite.png" />
+
+                </Button.ImageSource>
+            </Button>
+        </HorizontalStackLayout>
+
+        <!-- Main report list -->
+        <CollectionView x:Name="ReportCollectionView"
+                        AbsoluteLayout.LayoutBounds="0,0,1,1"
+                        AbsoluteLayout.LayoutFlags="All"
+                        Margin="10,70,10,10"  
+                        SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Margin="0,4"
+                           Padding="10"
+                           HasShadow="True"
+                           CornerRadius="10">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnReportItemTapped" />
+                        </Frame.GestureRecognizers>
+                        <StackLayout>
+                            <Label Text="{Binding Title}" FontAttributes="Bold" FontSize="16" />
+                            <Label Text="{Binding Subtitle}" FontSize="14" TextColor="Gray" />
+                            <Label Text="{Binding Detail}" FontSize="13" />
+                            <Label Text="{Binding Date, StringFormat='Due: {0:MMM dd, yyyy}'}"
+                               FontSize="12"
+                               TextColor="#0f74d9"
+                               IsVisible="{Binding HasDate}" />
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </AbsoluteLayout>
+</ContentPage>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:MAUI_Class_Tracker.Models"
+             xmlns:views="clr-namespace:MAUI_Class_Tracker.Views"
+             x:Class="MAUI_Class_Tracker.Views.Search"
+             Title="Search">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="menu.png"
+                 Priority="0"
+                 Order="Primary"
+                 Command="{Binding OpenFlyoutCommand}" />
+    </ContentPage.ToolbarItems>
+    
+    <VerticalStackLayout Padding="15" Spacing="15">
+
+        <SearchBar x:Name="SearchBar"
+                   Placeholder="Search terms, courses, or assessments..."
+                   TextChanged="OnSearchTextChanged" />
+
+        <CollectionView x:Name="SearchResultsCollectionView"
+                ItemsSource="{Binding SearchResults}"
+                SelectionMode="None"
+                Margin="10">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:SearchResult">
+                    <Frame Padding="10"
+                   Margin="0,5"
+                   CornerRadius="10"
+                   HasShadow="True"
+                   BackgroundColor="White">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnResultTapped" />
+                        </Frame.GestureRecognizers>
+
+                        <VerticalStackLayout>
+                            <Label Text="{Binding Display}" 
+                           FontSize="16" 
+                           FontAttributes="Bold" />
+                            <Label Text="{Binding Detail}" 
+                           FontSize="12" 
+                           TextColor="Gray" />
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </VerticalStackLayout>
+</ContentPage>
+

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MAUI_Class_Tracker.Views.AssessmentDetailPage"
+             Title="Assessment Details">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="menu.png"
+                 Priority="0"
+                 Order="Primary"
+                 Command="{Binding OpenFlyoutCommand}" />
+    </ContentPage.ToolbarItems>
+    
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="12">
+            <!-- Assessment Name
+            <Entry Placeholder="Assessment Name" Text="{Binding Name}" /> -->
+
+            <!-- Assessment Type -->
+            <!--<Picker x:Name="TypePicker" Title="Select Type" FontSize="Subtitle">
+                <Picker.Items>
+                    <x:String>Objective Assessment</x:String>
+                    <x:String>Performance Assessment</x:String>
+                </Picker.Items>
+            </Picker>-->
+            <Label Text="Assessment Type" FontAttributes="Bold" />
+            <Picker x:Name="TypePicker"
+                Title="Select Type"
+                FontSize="Small"
+                ItemsSource="{Binding AssessmentTypes}"
+                SelectedItem="{Binding SelectedType, Mode=TwoWay}"
+                TextColor="Gray"/>
+
+            <!-- Entry that shows the selected type -->
+            <Entry Text="{Binding SelectedType}"
+                Placeholder="Assessment Name"
+                IsReadOnly="True"
+                FontAttributes="Italic,Bold"
+                TextColor="Black"/>
+
+            <Label Text="Name" FontAttributes="Bold" />
+            <Entry x:Name="NameEntry" Placeholder="Assessment Name" />
+
+            <Label Text="Start Date" FontAttributes="Bold" />
+            <DatePicker x:Name="StartDatePicker" />
+
+            <Label Text="End Date" FontAttributes="Bold" />
+            <DatePicker x:Name="EndDatePicker" />
+
+            <Label Text="Due Date" FontAttributes="Bold" />
+            <DatePicker x:Name="DueDatePicker" />
+
+            <!-- Save Button -->
+            <Button Text="Save Assessment"
+                    Clicked="OnSaveClicked"
+                    BackgroundColor="#6200EE"
+                    TextColor="White"
+                    CornerRadius="8"
+                    Margin="0,10,0,10" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

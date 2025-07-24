@@ -1,0 +1,39 @@
+{
+  "terms": [
+    {
+      "id": 1,
+      "title": "Term 1",
+      "startDate": "2025-01-01",
+      "endDate": "2025-06-30",
+      "courses": [
+        {
+          "id": 1,
+          "title": "Mobile App Development",
+          "startDate": "2025-01-10",
+          "endDate": "2025-06-20",
+          "status": "In Progress",
+          "instructor": {
+            "name": "Anika Patel",
+            "phone": "555-123-4567",
+            "email": "anika.patel@strimeuniversity.edu"
+          },
+          "notes": "Focus on building a solid portfolio.",
+          "assessments": [
+            {
+              "id": 1,
+              "title": "Performance Assessment",
+              "dueDate": "2025-03-01",
+              "type": "Performance"
+            },
+            {
+              "id": 2,
+              "title": "Objective Assessment",
+              "dueDate": "2025-05-15",
+              "type": "Objective"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

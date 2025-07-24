@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MAUI_Class_Tracker.Views"
+             x:Class="MAUI_Class_Tracker.Views.TermDetailPage"
+             Title="Term Details"
+             BackgroundColor="White">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="menu.png"
+                 Priority="0"
+                 Order="Primary"
+                 Command="{Binding OpenFlyoutCommand}" />
+    </ContentPage.ToolbarItems>
+    
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15"
+                             VerticalOptions="FillAndExpand">
+            <!-- Term Info -->
+            <Label x:Name="TermTitleLabel" 
+                   Text="Term Title" 
+                   FontSize="14" />
+            <Entry Text="{Binding Title, Mode=TwoWay}" 
+                   Placeholder="Enter Term Name" FontAttributes="Bold"/>
+
+            <Label Text="Start Date" FontSize="14" />
+            <DatePicker x:Name="StartDatePicker" Date="{Binding StartDate, Mode=TwoWay}" 
+                        Format="MMM dd, yyyy" />
+
+            <Label Text="End Date" FontSize="14" />
+            <DatePicker x:Name="EndDatePicker" Date="{Binding EndDate, Mode=TwoWay}" 
+                        Format="MMM dd, yyyy" />
+
+            <!-- Save Button -->
+            <Button Text="Save Term"
+                    Clicked="OnSaveClicked"
+                    BackgroundColor="#6200EE"
+                    TextColor="White"
+                    CornerRadius="8"
+                    HeightRequest="48" />
+  
+            <Button Text="Add Course"
+                    Clicked="OnAddCourseClicked"
+                    BackgroundColor="#6200EE"
+                    TextColor="White"
+                    CornerRadius="8"
+                    HeightRequest="48" />          
+            
+            <!-- Course Section -->
+            <Label Text="Courses"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   Margin="0,10,0,5" />
+
+
+            <CollectionView x:Name="CoursesCollectionView"
+                            SelectionMode="None"
+                            Margin="0,0,0,5"
+                            VerticalOptions="FillAndExpand"
+                            HeightRequest="400">
+                <!-- Optional cap on height -->
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BorderColor="LightGray"
+                               Padding="10"
+                               Margin="5"
+                               CornerRadius="10"
+                               HasShadow="True">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnCourseTapped"
+                      CommandParameter="{Binding .}" />
+                            </Frame.GestureRecognizers>
+
+                            <Grid ColumnSpacing="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <VerticalStackLayout Grid.Column="0" Spacing="2">
+                                    <Label Text="{Binding Title}" FontSize="16" FontAttributes="Bold" />
+                                    <Label Text="{Binding StartDate, StringFormat='Start: {0:MMM dd, yyyy}'}"
+                                           FontSize="12"
+                                           TextColor="Gray" />
+                                    <Label Text="{Binding EndDate, StringFormat='End: {0:MMM dd, yyyy}'}"
+                                           FontSize="12"
+                                           TextColor="Gray" />
+                                </VerticalStackLayout>
+
+                                <HorizontalStackLayout Grid.Column="1"
+                                                       Spacing="5"
+                                                       VerticalOptions="Center"
+                                                       HorizontalOptions="End">
+                                    <ImageButton Source="notificationadd.png"
+                                                 WidthRequest="24"
+                                                 HeightRequest="24"
+                                                 BackgroundColor="Transparent"
+                                                 Clicked="OnNotifyCourseClicked"
+                                                 CommandParameter="{Binding .}" />
+
+                                    <ImageButton Source="share.png"
+                                                 WidthRequest="24"
+                                                 HeightRequest="24"
+                                                 BackgroundColor="Transparent"
+                                                 Clicked="OnShareCourseClicked"
+                                                 CommandParameter="{Binding .}" />
+
+                                    <ImageButton Source="editsquare.png"
+                                                 WidthRequest="24"
+                                                 HeightRequest="24"
+                                                 BackgroundColor="Transparent"
+                                                 Clicked="OnAddNoteToCourseClicked"
+                                                 CommandParameter="{Binding .}" />
+
+                                    <ImageButton Source="edit.png"
+                                                 WidthRequest="24"
+                                                 HeightRequest="24"
+                                                 BackgroundColor="Transparent"
+                                                 Clicked="OnEditCourseClicked"
+                                                 CommandParameter="{Binding .}" />
+
+                                    <ImageButton Source="delete.png"
+                                                 WidthRequest="24"
+                                                 HeightRequest="24"
+                                                 BackgroundColor="Transparent"
+                                                 Clicked="OnDeleteCourseClicked"
+                                                 CommandParameter="{Binding .}" />
+                                </HorizontalStackLayout>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MAUI_Class_Tracker.Views.CourseDetailPage"
+             Title="Course Details">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="menu.png"
+                 Priority="0"
+                 Order="Primary"
+                 Command="{Binding OpenFlyoutCommand}" />
+    </ContentPage.ToolbarItems>
+    
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="10"
+                             VerticalOptions="FillAndExpand">
+            <VerticalStackLayout>
+                <Label Text="Course title" />
+                            <Entry x:Name="titleEntry" Placeholder="Course Title" Text="{Binding SelectedCourse.Title, Mode=TwoWay}" FontAttributes="Bold"/>
+
+                            <Label Text="Start Date" />
+                            <DatePicker x:Name="StartDatePicker" Date="{Binding SelectedCourse.StartDate}" />
+
+                            <Label Text="End Date" />
+                            <DatePicker x:Name="EndDatePicker" Date="{Binding SelectedCourse.EndDate}" />
+
+                            <Label Text="Status" />
+                            <Picker
+                                x:Name="progressPicker"
+                                ItemsSource="{Binding StatusOptions}"
+                                SelectedItem="{Binding SelectedCourse.Status, Mode=TwoWay}"
+                                FontSize="14" />
+
+                <!-- Instructor Info -->
+                            <Label Text="Instructor Name" />
+                            <Entry x:Name="instructorEntry" Placeholder="Instructor Name" Text="{Binding SelectedCourse.InstructorName, Mode=TwoWay}" />
+
+                            <Label Text="Phone" />
+                            <Entry x:Name="instructorPhoneEntry" Placeholder="Phone" Text="{Binding SelectedCourse.InstructorPhone, Mode=TwoWay}" Keyboard="Telephone" />
+
+                            <Label Text="Email" />
+                            <Entry x:Name="instructorEmailEntry" Placeholder="Email" Text="{Binding SelectedCourse.InstructorEmail, Mode=TwoWay}" Keyboard="Email" />
+
+                            <!-- Notes -->
+                            <Label Text="Notes" />
+                            <Editor x:Name="notesEditor" Text="{Binding SelectedCourse.Notes}" AutoSize="TextChanges" HeightRequest="100" />
+                        </VerticalStackLayout>
+                        <!--</Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>-->
+
+            <!-- Share Notes -->
+            <Button Text="Share Notes"
+                    Clicked="OnShareNotesClicked" />
+
+            <!-- Assessments -->
+            <Label Text="Assessments"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   Margin="0,10,0,5" />
+
+            <!-- CollectionView Handles Scroll Better Than Repeating StackLayouts -->
+            <CollectionView ItemsSource="{Binding Assessments}"
+                            Margin="0,0,0,10"
+                            SelectionMode="None"
+                            VerticalOptions="FillAndExpand">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BorderColor="LightGray"
+                               CornerRadius="8"
+                               Padding="10"
+                               Margin="0,5"
+                               HasShadow="True">
+                            <VerticalStackLayout Spacing="5">
+                                <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="16" />
+
+                                <HorizontalStackLayout Spacing="10">
+                                    <ImageButton Source="edit.png"
+                                                 WidthRequest="24"
+                                                 HeightRequest="24"
+                                                 BackgroundColor="Transparent"
+                                                 Clicked="OnEditAssessmentClicked"
+                                                 CommandParameter="{Binding .}" />
+
+                                    <ImageButton Source="notificationadd.png"
+                                                 WidthRequest="24"
+                                                 HeightRequest="24"
+                                                 BackgroundColor="Transparent"
+                                                 Clicked="OnNotifyAssessmentClicked"
+                                                 CommandParameter="{Binding .}" />
+
+                                    <ImageButton Source="delete.png"
+                                                 WidthRequest="24"
+                                                 HeightRequest="24"
+                                                 BackgroundColor="Transparent"
+                                                 Clicked="OnDeleteAssessmentClicked"
+                                                 CommandParameter="{Binding .}" />
+                                </HorizontalStackLayout>
+
+                                <Label Text="Start Date" FontSize="12" />
+                                <DatePicker Date="{Binding StartDate}" Format="MMM dd, yyyy" />
+
+                                <Label Text="End Date" FontSize="12" />
+                                <DatePicker Date="{Binding EndDate}" Format="MMM dd, yyyy" />
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Add + Save Buttons -->
+            <Button Text="Add Assessment"
+                    Clicked="OnAddAssessmentClicked" />
+            <Button Text="Save Course"
+                    Clicked="OnSaveClicked" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

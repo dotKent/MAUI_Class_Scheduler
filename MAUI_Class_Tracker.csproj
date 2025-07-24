@@ -1,0 +1,162 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net8.0-android</TargetFrameworks>
+    <UseMaui>true</UseMaui>
+	<OutputType>Exe</OutputType>
+    <SingleProject>true</SingleProject>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <ApplicationTitle>MAUI_Class_Tracker</ApplicationTitle>
+    <ApplicationId>com.companyname.maui_class_tracker</ApplicationId>
+    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+    <ApplicationVersion>1</ApplicationVersion>
+
+    <!-- Optional: disable compression metadata that was causing issues -->
+	<EnableAssemblyCompression>false</EnableAssemblyCompression>
+	<AndroidEnableAssemblyCompression>false</AndroidEnableAssemblyCompression>
+	<EnableCompressionMetadataGeneration>false</EnableCompressionMetadataGeneration>
+	<SupportedOSPlatformVersion>21</SupportedOSPlatformVersion>
+	<PublishTrimmed>false</PublishTrimmed>
+
+    <EnableDefaultItems>true</EnableDefaultItems>
+    <WindowsPackageType>None</WindowsPackageType>
+    <WindowsSdkPackageVersion>10.0.19041.53</WindowsSdkPackageVersion>
+  </PropertyGroup>
+
+	<PropertyGroup Condition="'$(TargetFramework)' == 'net8.0-android'">
+		<RuntimeIdentifier>android-arm64</RuntimeIdentifier>
+		<AndroidPackageFormat>apk</AndroidPackageFormat>
+		<GenerateAppBundle>false</GenerateAppBundle>
+		<EnableAssemblyCompression>false</EnableAssemblyCompression>
+		<AndroidEnableAssemblyCompression>false</AndroidEnableAssemblyCompression>
+		<EnableCompressionMetadataGeneration>false</EnableCompressionMetadataGeneration>
+		<SupportedOSPlatformVersion>21.0</SupportedOSPlatformVersion>
+		<RunAOTCompilation>false</RunAOTCompilation>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(TargetFramework)' == 'net8.0-windows10.0.19041.0'">
+		<RuntimeIdentifier>win10-x64</RuntimeIdentifier>
+		<SupportedOSPlatformVersion>10.0.19041.0</SupportedOSPlatformVersion>
+		<TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|AnyCPU'">
+	  <AndroidKeyStore>True</AndroidKeyStore>
+	  <AndroidUseAapt2>True</AndroidUseAapt2>
+	  <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
+	  <AndroidPackageFormat>aab</AndroidPackageFormat>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- App Icon -->
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+
+		<!-- Splash Screen -->
+		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+
+		<!-- Images -->
+		<MauiImage Include="Resources\Images\*" />
+		<MauiImage Update="Resources\Images\dotnet_bot.png" Resize="true" BaseSize="300,185" />
+		
+
+		<!-- Fonts -->
+		<MauiFont Include="Resources\Fonts\*" />
+
+		<!-- Raw Assets -->
+		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="msbuild.binlog" />
+	  <None Remove="Services\sampledata.json" />
+	  <None Remove="terms.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.100" />
+		<PackageReference Include="CommunityToolkit.Maui" Version="8.0.0" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+		<PackageReference Include="Plugin.LocalNotification" Version="11.1.4" />
+		<PackageReference Include="Plugin.Permissions" Version="6.0.1" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+		<PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
+		<PackageReference Include="Xamarin.AndroidX.Collection.Jvm" Version="1.4.0.4" />
+		<PackageReference Include="Xamarin.AndroidX.Collection.Ktx" Version="1.4.0.1" />
+		<PackageReference Include="Xamarin.AndroidX.Activity" Version="1.9.0.3" />
+		<PackageReference Include="Xamarin.AndroidX.Activity.Ktx" Version="1.9.0.3" />
+		<PackageReference Include="xunit" Version="2.5.0" />
+		<PackageReference Include="xunit.runner.visualstudio" Version="2.5.0" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.10.0" />
+	</ItemGroup>
+	
+	<ItemGroup>
+		<MauiXaml Update="Views\AssessmentDetailPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\CalendarPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\HomePage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\CourseDetailPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\HomePage.xaml" />
+		<MauiXaml Update="Views\LoginPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\ReportPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\Search.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiAsset Include="msbuild.binlog">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </MauiAsset>
+	  <MauiAsset Include="Resources\Data\sampledata.json" />
+	</ItemGroup>
+	
+	<ItemGroup>
+	  <AndroidRemoveEmbeddedResource Include="androidx.activity.activity.aar" />
+	</ItemGroup>
+	
+	<ItemGroup>
+	  <AndroidRemoveEmbeddedResource Include="**/androidx.lifecycle.lifecycle-viewmodel-ktx.aar" />
+	</ItemGroup>
+	
+	<ItemGroup>
+	  <AndroidRemoveEmbeddedResource Include="**/androidx.activity.activity.aar" />
+	</ItemGroup>
+	
+	<ItemGroup>
+	  <Compile Remove="Models\Search.Designer.cs" />
+	  <Compile Remove="Views\DashboardPage.cs" />
+	</ItemGroup>
+	
+	<ItemGroup>
+	  <MauiXaml Remove="Views\DashboardPage.xaml" />
+	</ItemGroup>
+	
+	<ItemGroup>
+	  <Folder Include="Resources\Images\NewFolder\" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<InternalsVisibleTo Include="TestProject" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Mobile_Class_Tracker.Core\Mobile_Class_Tracker.Core.csproj" />
+	</ItemGroup>
+	
+	<Import Project="Platforms\Android\AndroidPackageSigning.props" Condition="Exists('Platforms\Android\AndroidPackageSigning.props')" />
+	
+</Project>
+

@@ -1,0 +1,10 @@
+﻿
+	<Project>
+		<PropertyGroup>
+			<AndroidKeyStore>True</AndroidKeyStore>
+			<AndroidSigningKeyStore>C:\Users\kent\keys\my-release-key.keystore</AndroidSigningKeyStore>
+			<AndroidSigningStorePass>Sup3rG3n1u5</AndroidSigningStorePass>
+			<AndroidSigningKeyAlias>mauikey</AndroidSigningKeyAlias>
+			<AndroidSigningKeyPass>Sup3rG3n1u5</AndroidSigningKeyPass>
+		</PropertyGroup>
+	</Project>
